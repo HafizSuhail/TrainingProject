@@ -1,0 +1,93 @@
+﻿@model IList<Stanford_University.BusinessEntities.Student>
+
+@{
+    Layout = "_MainLayout";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class=" container-fluid">
+
+            <div>
+                <a class="btn btn-primary btn-sm float-end mb-2 " role="button" type="link" href="@Url.Action(controller:"Student",action:"AddStudent")">Add Student</a>
+            </div>
+
+            <table class="table table-bordered table-hover table-sm text-center" id="Studentlist">
+                <thead>
+                    <tr class="table-active">
+                        <th>RollNumber</th>
+                        <th>Student Name</th>
+                        <th>Gender</th>
+                        <th>Date OF Brith</th>
+                        <th>Mobile Number</th>
+                        <th>Email_ID</th>
+                        <th>Country</th>
+                        <th>Category</th>
+                        <th>Course</th>
+                        <th scope="auto" colspan="3" align="center" class="text-warning">Modification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var students in Model)
+                    {
+                        <tr id="@students.StudentId">
+                            <td>@students.RollNo</td>
+                            <td class="text-primary">@students.StudentName</td>
+                            <td>@students.Gender</td>
+                            <td>@students.Dob.ToShortDateString()</td>
+                            <td>@students.MobileNumber</td>
+                            <td class="text-secondary">@students.Email</td>
+                            <td>@students.Country.CountryName</td>
+                            <td>@students.Category.CategoryName</td>
+                            <td>@students.Course.Title</td>
+                            <td><a class="btn btn-info btn-sm " href="@Url.Action("StudentRo","Student",new{Studentid = students.StudentId})">View</a></td>
+                            <td><a class="btn btn-secondary btn-sm" href="@Url.Action("StudentEditor","Student",new{Studentid = students.StudentId})">Edit</a></td>
+                            <td><a class="btn btn-danger btn-sm" href="#" onclick="DeleteStudent(@students.StudentId)">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function DeleteStudent(StudentId) {
+
+        var deletestudentUrl = "https://localhost:7207/Student/DeleteStudent";
+
+            var deleteStudentdata = { Studentid: StudentId };
+
+        // Send the JSON data using $.post()
+        $.post(deletestudentUrl,deleteStudentdata,
+            function (response) {
+                if (response)
+                {
+                    // Success callback
+                    $("#Studentlist").find("#" + StudentId).remove();
+                }
+                else
+                {
+                    alert("Fail to delete a student, please contact admin!");
+                }
+
+            },'json')
+            .fail(function (xhr, status, error) {
+                    // Error callback
+                    console.error('Error:', error);
+            });
+
+
+
+
+
+    }
+</script>
+
+
+
+
+
+

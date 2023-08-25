@@ -1,0 +1,88 @@
+﻿@model Stanford_University.Models.StudentEditorModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_MainLayout";
+}
+
+<div id="maindiv">
+    <h1 class=" offset-md-4 align-content-center">STUDENT REGISTRATION FORM</h1>
+    <hr />
+
+    <div class="row align-content-center">
+        <div class="col-md-4 offset-4">
+            <form method="post"
+                  asp-controller="Student"
+                  asp-action="StudentForm">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="alert alert-info text-center" role="alert">
+                    <h5>Bacic Details</h5>
+                </div>
+
+                <input asp-for="Studentid">
+                <div class="form-group">
+                    <label asp-for="RollNo" class="control-label"></label>
+                    <input asp-for="RollNo" class="form-control" />
+                    <span asp-validation-for="RollNo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SName" class="control-label"></label>
+                    <input asp-for="SName" class="form-control" />
+                    <span asp-validation-for="SName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="gender" class="control-label"></label>
+                    <input asp-for="gender" class="form-control" />
+                    <span asp-validation-for="gender" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="dob" class="control-label"></label>
+                    <input asp-for="dob" class="form-control" />
+                    <span asp-validation-for="dob" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="mobilenumber" class="control-label"></label>
+                    <input asp-for="mobilenumber" class="form-control" />
+                    <span asp-validation-for="mobilenumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="email" class="control-label"></label>
+                    <input asp-for="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="countryid" class="control-label"></label>
+                    <select asp-for="countryid" class="form-control" asp-items="Model.Countries"></select>
+                    <span asp-validation-for="countryid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="categoryid" class="control-label"></label>
+                    <select asp-for="categoryid" class="form-control" asp-items="Model.Categories"></select>
+                    <span asp-validation-for="categoryid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="courseid" class="control-label"></label>
+                    <select asp-for="courseid" class="form-control" asp-items="Model.Courses"></select>
+                    <span asp-validation-for="countryid" class="text-danger"></span>
+                </div>
+                
+                @*<div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                </div>*@
+                <div class="mt-2 float-end">
+                    <a class="btn btn-secondary " asp-action="StudentList">Back</a>
+                    <button class="btn btn-primary " type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

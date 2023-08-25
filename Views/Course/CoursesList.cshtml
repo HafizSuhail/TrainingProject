@@ -1,0 +1,83 @@
+﻿@using Stanford_University.BusinessEntities
+@model IList<Stanford_University.BusinessEntities.Course>
+
+
+@{
+    Layout = "_MainLayout";
+}
+
+
+<div class="row">
+
+    <div class=" col-8 offset-2">
+
+
+
+            <div>
+                <a class="btn btn-primary btn-sm float-end mb-2 " role="button" type="link" href="@Url.Action(controller:"Course",action:"AddCourse")">Add Course</a>
+            </div>
+
+        <table class="table table-bordered table-hover table-sm text-center" id="CourseList">
+                <thead>
+                    <tr class="table-active">
+                        <th>Course Name</th>
+                        <th>Duration</th>
+                        <th>Price</th>
+                        <th scope="auto" colspan="2" align="center">Modify</th>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    @foreach (var Courseitem in Model)
+                    {
+                        <tr id="@Courseitem.CourseId">
+                            <td class="text-primary">@Courseitem.Title</td>
+                            <td>@Courseitem.Duration Days.All Levels</td>
+                            <td class="text-warning">@Courseitem.Price .INR</td>
+                            <td align="center"> <a class="btn btn-secondary btn-sm" href="@Url.Action("CourseEditor","Course",new{CourseId = Courseitem.CourseId})">Edit</a></td>
+                            <td align="center"><a class="btn btn-danger btn-sm" href="#" onclick="Deletecourse(@Courseitem.CourseId)">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        
+
+
+    </div>
+
+</div>
+
+        
+<script type="text/javascript">
+
+    function Deletecourse(CourseId){
+
+        var deletecourseurl = "https://localhost:7207/Course/Deletecourse";
+
+        var deletecoursedata = { courseid: CourseId };
+
+        //Send the JSON Data using $.post()
+
+        $.post(deletecourseurl, deletecoursedata,
+            function (response) {
+
+                if (response)
+                {
+                    // Success callback
+                    $("#CourseList").find("#" + CourseId).remove();
+
+                }
+                else
+                {
+                    alert("Fail to delete a course, please contact admin!")
+                }
+
+            }, 'json')
+            .fail(function (xhr, status, error){
+                // Error callback
+                console.error('Error:', error);
+            });
+
+
+    }
+</script>
+

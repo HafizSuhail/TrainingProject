@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "_LoginLayout";
+}
+@model Stanford_University.Models.LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+
+    body {
+        background-image: url(https://img.freepik.com/free-vector/blue-pink-halftone-background_53876-99004.jpg?w=1380&t=st=1691144904~exp=1691145504~hmac=926297a1bdcf5807dea388aaf95dfe6ca8b5a22a4f4b8bce308129ed76d8dfec);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        padding-right: 0px;
+    }
+</style>
+
+<div class="container  position-absolute top-50 start-50 translate-middle">
+
+    <div class="row align-items-center">
+        <div class="mx-auto col-4 bg-white bg-opacity-50 shadow p-3 mb-5 bg-body-tertiary rounded">
+
+            <div class="row" style="padding-left: 20%;">
+                <div class="col-2" style="padding-right: 0px; padding-left : 0px;">
+                    <img src="~/css/Images/1000_F_491766294_h4j7LbW2YgfbNHhq7F8GboIc1XyBSEY5.jpg" class="img-fluid">
+                </div>
+                <div class="col-6 text-start mt-3 text-secondary fst-italic w-auto" style=" padding-right: 0px; padding-left : 0px;">
+                    <h5>StanfordUniversity</h5>
+                </div>
+            </div>
+
+            <form method="post"
+                  asp-controller="Account"
+                  asp-action="SubmitLogin">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="input-group mb-3 mt-4">
+                    <label asp-for="Username" class="input-group-text">Email</label>
+                    <input asp-for="Username" class="form-control">
+                </div>
+                <span asp-validation-for="Username" class="text-danger"></span>
+
+                <div class="input-group mb-3 mt-4">
+                    <label class="input-group-text" asp-for="Password">Password</label>
+                    <input class="form-control" asp-for="Password"> <br>
+
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+                <div class="col-12 mb-3 mt-4">
+                    <span> No Account? </span> <span class="text-info"> <a href="">Create your Account </a></span>
+                </div>
+
+                <div class="col-12">
+                    <div class="float-md-start mb-4">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+</div>

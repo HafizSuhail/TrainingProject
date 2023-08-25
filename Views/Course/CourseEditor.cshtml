@@ -1,0 +1,45 @@
+﻿@model Stanford_University.Models.CourseEditorModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_MainLayout";
+}
+
+
+
+<div class="row align-content-center">
+    <div class="col-md-5 offset-3">
+
+        <h1 class=" offset-3 align-content-center">COURSE EDITOR FORM</h1>
+        <div class="alert alert-info text-center" role="alert">
+            <h5>Update Course Details</h5>
+        </div>
+
+
+        <form method="post"
+              asp-controller="Course"
+              asp-action="CEditorUpdate">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Courseid">
+            <div class="form-group">
+                <label asp-for="CourseName" class="control-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration" class="control-label"></label>
+                <input asp-for="Duration" class="form-control" />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="mt-2 float-end">
+                <a class="btn btn-secondary " asp-action="CoursesList">Back</a>
+                <button class="btn btn-primary " type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
